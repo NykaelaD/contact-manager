@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="/javascripts/jquery.js"></script>
+  <script src="/javascripts/handlebars.js"></script>
+  <link rel="stylesheet" href="/stylesheets/stylesheet.css" />
+</head>
+<body>
+  <h1>Contact Manager</h1>
+  <div id="nav-and-info" class="show">
+    <div id="nav">
+      <form id="add-contact-button-nav">
+        <input type="button" value="Add Contact"></input>
+      </form>
+      <div id="search">
+        <input id="search-bar" type="text" placeholder="Search">
+      </div>
+    </div>
+    <div id="contact-info">
+      <div id="no-contacts-placeholder" class="show">
+        <span>There is no contacts.</span>
+        <form id="add-contact-button-info">
+          <input type="button" value="Add Contact">
+        </form>
+      </div>
+      <div id="contacts">
+        <script id="tag" type="text/x-handlebars">
+          <a href={{this}}>{{this}}</a>
+        </script>
+
+        <script id='contact-template' type='text/x-handlebars'>
+          {{#each contact}}
+          <div id={{id}} class="contact">
+            <h3>{{full_name}}</h3>
+            <ul>
+              <li>Phone Number: {{phone_number}}</li>
+              <li>Email: {{email}}</li>
+              <li id="tags">Tags: 
+                {{#each tags}}
+                {{>tag}}
+                {{/each}}
+              </li>
+            </ul>
+            <form id="edit-or-delete-contact" action="" method="post">
+              <input type="submit" value="Edit">
+              <input type="button" value="Delete">
+            </form>
+          </div>
+          {{/each}}
+        </script>
+      </div>
+    </div>
+  </div>
+  <div id="new-contact-modal">
+    <div id="modal-layer" class="hide"></div>
+    <div id="modal" class="hide">
+      <form id="new-contact-form" action="" method="post">
+        <label for="full_name">Full name:</label>
+        <input type="text" name="full_name" id="full_name" defaultValue=''/><br>
+        <label for="email">Email address:</label>
+        <input type="text" name="email" id="email" defaultValue=''/><br>
+        <label for="phone_number">Telephone Number</label>
+        <input type="text" name="phone_number" id="phone_number" defaultValue=''/><br>
+        <label for="tag">Tags:</label>
+        <input type="text" name="tags" id="tags" defaultValue=null/><br>
+        <input type="submit" value="Submit"/>
+        <input type="button" value="Cancel"/>
+      </form>
+    </div>
+  </div>
+  <script src="/javascripts/app.js"></script>
+</body>
+</html>
